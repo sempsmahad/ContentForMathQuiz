@@ -69,15 +69,15 @@ public class QuestionAdapter extends RecyclerView.Adapter<QuestionAdapter.ViewHo
 
         public ViewHolder(View view) {
             super(view);
-            id = (TextView) view.findViewById(R.id.from);
-            year = (TextView) view.findViewById(R.id.year);
-            lyt_parent = (View) view.findViewById(R.id.lyt_parent_item);
+
+            id = view.findViewById(R.id.from);
+            year = view.findViewById(R.id.year);
+            lyt_parent = view.findViewById(R.id.lyt_parent_item);
         }
     }
 
     public interface OnClickListener {
         void onItemClick(View view, Question obj, int pos);
-
         void onItemLongClick(View view, Question obj, int pos);
     }
 

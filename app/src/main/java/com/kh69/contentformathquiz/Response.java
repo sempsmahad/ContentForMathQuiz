@@ -7,7 +7,6 @@ import java.util.ArrayList;
 
 public class Response {
 
-
     @SerializedName("questions")
     @Expose
     private ArrayList<Question> alldata;

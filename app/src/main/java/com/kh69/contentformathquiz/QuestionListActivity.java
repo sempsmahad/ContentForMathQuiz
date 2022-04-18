@@ -4,7 +4,6 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
-import android.widget.LinearLayout;
 import android.widget.Toast;
 
 import androidx.annotation.Nullable;
@@ -21,14 +20,13 @@ import java.util.List;
 
 import retrofit2.Call;
 import retrofit2.Callback;
-import retrofit2.Response;
 
 public class QuestionListActivity extends AppCompatActivity {
 
     private List<Question> mQuestions = new ArrayList<>();
     QuestionService mQuestionService;
-    RecyclerView rv_questions;
-    private Toolbar toolbar;
+    RecyclerView    rv_questions;
+    private Toolbar         toolbar;
     private QuestionAdapter mQuestionAdapter;
 
     @Override
@@ -43,10 +41,9 @@ public class QuestionListActivity extends AppCompatActivity {
     private void initComponent() {
 
         mQuestionService = APIUtils.getQuestionService();
-        rv_questions = findViewById(R.id.rv_questions);
+        rv_questions     = findViewById(R.id.rv_questions);
         rv_questions.setLayoutManager(new LinearLayoutManager(this));
         rv_questions.setHasFixedSize(true);
-
 
         mQuestionAdapter = new QuestionAdapter(this, mQuestions);
 ////        Toast.makeText(QuestionListActivity.this, ""+mQuestions.size(), Toast.LENGTH_SHORT).show();
@@ -71,13 +68,16 @@ public class QuestionListActivity extends AppCompatActivity {
     }
 
     private void getQuestionsList() {
-        Call<com.kh69.contentformathquiz.Response> call = mQuestionService.getQuestions();
-//        final ArrayList<Question>[] questions = new ArrayList[]{new ArrayList<>()};
-        call.enqueue(new Callback<com.kh69.contentformathquiz.Response>() {
+        Toast.makeText(QuestionListActivity.this, "called 1", Toast.LENGTH_SHORT).show();
 
+        Call<Response> call = mQuestionService.getQuestions();
+//        final ArrayList<Question>[] questions = new ArrayList[]{new ArrayList<>()};
+//        Toast.makeText(QuestionListActivity.this, "called 4", Toast.LENGTH_SHORT).show();
+        call.enqueue(new Callback<Response>() {
             @Override
-            public void onResponse(Call<com.kh69.contentformathquiz.Response> call, Response<com.kh69.contentformathquiz.Response> response) {
-                if(response.isSuccessful()){
+            public void onResponse(Call<Response> call, retrofit2.Response<Response> response) {
+                Toast.makeText(QuestionListActivity.this, "called 3", Toast.LENGTH_SHORT).show();
+                if (response.isSuccessful()) {
                     mQuestions = response.body().getAlldata();
                     mQuestionAdapter = new QuestionAdapter(QuestionListActivity.this, mQuestions);
                     rv_questions.setAdapter(mQuestionAdapter);
@@ -87,9 +87,9 @@ public class QuestionListActivity extends AppCompatActivity {
                         public void onItemClick(View view, Question obj, int pos) {
                             Question question = mQuestionAdapter.getItem(pos);
                             TabsActivity.sQuestion = question;
-                            Toast.makeText(QuestionListActivity.this, ""+question.getId(), Toast.LENGTH_SHORT).show();
+                            Toast.makeText(QuestionListActivity.this, "" + question.getId(), Toast.LENGTH_SHORT).show();
 
-                            startActivity(new Intent(QuestionListActivity.this,TabsActivity.class));
+                            startActivity(new Intent(QuestionListActivity.this, TabsActivity.class));
                         }
 
                         @Override
@@ -97,6 +97,8 @@ public class QuestionListActivity extends AppCompatActivity {
 
                         }
                     });
+                } else {
+                    Toast.makeText(QuestionListActivity.this, "called 2", Toast.LENGTH_SHORT).show();
                 }
             }
 
