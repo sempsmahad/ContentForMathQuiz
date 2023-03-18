@@ -39,12 +39,7 @@ public class TabsActivity extends AppCompatActivity {
 
     }
     private void initToolbar() {
-//        Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
-////        toolbar.setNavigationIcon(R.drawable.ic_menu);
-//        setSupportActionBar(toolbar);
-//        getSupportActionBar().setTitle("Latex to Katex");
-//        getSupportActionBar().setDisplayHomeAsUpEnabled(true);
-//        Tools.setSystemBarColor(this, R.color.blue_grey_600);
+
     }
 
     @RequiresApi(api = Build.VERSION_CODES.N)
